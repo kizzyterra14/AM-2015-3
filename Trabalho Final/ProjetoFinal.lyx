@@ -1,0 +1,343 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\renewcommand \thefigure{Figura~\@arabic\c@figure}
+\def\fps@figure{tbp}
+\def\ftype@figure{1}
+\def\ext@figure{lof}
+\def\fnum@figure{\thefigure}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language brazilian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing onehalf
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 2.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+FUNDAÇÃO GETULIO VARGAS
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+ESCOLA DE MATEMÁTICA APLICADA
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+MESTRADO 2015.3
+\end_layout
+
+\begin_layout Standard
+\align center
+APRENDIZAGEM POR MÁQUINAS
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+Prof Eduardo Mendes
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 4cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+Projeto Final
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 4cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+KIZZY TERRA
+\end_layout
+
+\begin_layout Standard
+\align center
+LUCAS MACHADO
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 5cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+RIO DE JANEIRO
+\end_layout
+
+\begin_layout Standard
+\align center
+DEZEMBRO/2015
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introdução
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+indent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Este relatório visa descrever o processo de implementação das soluções submetida
+s na Competição de Reconhecimento de Dígitos do Kaggle (https://www.kaggle.com/c/d
+igit-recognizer).
+ O desempenho destas soluçõeos nesta competição será utilizado na disciplina
+ de Aprendizado de Máquina, correspondendo ao seu projeto final, a fim de
+ avaliar a habilidade dos alunos de utilizar técnicas de machine learning
+ para solucionar um problema real.
+ 
+\end_layout
+
+\begin_layout Section
+A Competição de Reconhecimento de Dígitos
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+indent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+O objetivo da competição é reconhecer dígitos em imagens que contém dígitos
+ escritos a mão.
+ Os dados para a compentição foram retirados do MNIST dataset.
+ O MNIST (”Modified National Institute of Standards and Technology”) dataset
+ é um conjunto de dados clássico dentro da comunidade de Aprendizado de
+ Máquina e tem sido largamente estudado (mais detalhes em http://yann.lecun.com/ex
+db/mnist/index.html).
+\end_layout
+
+\begin_layout Section
+Escolha de 
+\emph on
+features
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+indent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A escolha das 
+\emph on
+features 
+\emph default
+a serem utilizadas em cada algoritmo é uma etapa crucial na proposta de
+ uma solução adequada.
+ 
+\end_layout
+
+\begin_layout Standard
+- Utilizamos PCA
+\end_layout
+
+\begin_layout Section
+Algoritmos utilizados
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+indent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para encontrar o modelo 
+\end_layout
+
+\begin_layout Standard
+descricao, analise de performance, escolha dos parametros
+\end_layout
+
+\begin_layout Subsection
+SVM 
+\end_layout
+
+\begin_layout Section
+O Modelo escolhido
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+indent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Resultados, erros in-sample e out--of-samplfe
+\end_layout
+
+\end_body
+\end_document
