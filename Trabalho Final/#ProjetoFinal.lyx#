@@ -33,7 +33,7 @@
 \index_command default
 \float_placement H
 \paperfontsize default
-\spacing other 1.5
+\spacing onehalf
 \use_hyperref false
 \papersize a4paper
 \use_geometry true
@@ -276,49 +276,11 @@ features
 \emph default
 a serem utilizadas em cada algoritmo é uma etapa importante na proposta
  de uma solução adequada.
- Quando lidamos com imagens consideramos cada pixel como uma dimensão diferente;
- é fácil perceber que para uma imagem não muito grande o número de dimensões
- já se torna grande e a correlação entre elas também.
- Para contornar este problema, utilizam-se técnicas como análise de componente
- principais (PCA) e 
-\emph on
-data
-\emph default
- whitening.
  
 \end_layout
 
 \begin_layout Standard
-A análise de componentes principais (PCA) é um método para reduzir as dimensões
- de um conjunto de dados.
- Isto é feito, explorando-se correlações entre algumas das dimensões.
- Por essa razão, a utilização deste tipo de método é bastante conveniente
- em contextos como o de reconhecimento de imagens.
-\end_layout
-
-\begin_layout Standard
-O 
-\emph on
-data
-\emph default
- whitening
-\emph on
- 
-\emph default
-é utilizado para duas principais finalidades: diminuir a correlação entre
- as features existentes e forçar todas as 
-\emph on
-features 
-\emph default
-a terem a mesma variância.
- Esta método é bastante utilizad no contexto de classificação de imagens
- devido a alta redundância de informação presente em pixels adjacentes.
- No caso de imagens, pixels próximos fornecem informações altamente correlaciona
-das e o objetivo do 
-\emph on
-whitening 
-\emph default
-é diminuir a quantidade de informação redundante.
+- Utilizamos PCA
 \end_layout
 
 \begin_layout Section
@@ -454,49 +416,12 @@ o qual consiste de considerar a informação dos pontos vizinhos mais próximos
 \end_layout
 
 \begin_layout Standard
-O parâmetro k controla o trade off entre a aproximação e a generalização.
- Escolhendo
-\begin_inset Formula $k$
-\end_inset
-
- muito pequeno obtém-se uma regra de decisão complexa, o que causa overfitting
- nos dados; Por outro lado, um
-\begin_inset Formula $k$
-\end_inset
-
- muito garnde conduz a underfitting.
- Embora
-\emph on
- k = 3
-\emph default
- funcione bem quando 
-\begin_inset Formula $E_{out}$
-\end_inset
-
- é pequeno, em situações mais gerais precisamos escolher entre os diferentes
- 
-\begin_inset Formula $k$
-\end_inset
-
-: cada valor de 
-\begin_inset Formula $k$
-\end_inset
-
-, por sua vez, corrsponde será um modelo diferente.
- Para cada caso, portanto, deve-se o melhor valor de 
-\begin_inset Formula $k$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 Para a classificação dos dígitos utilizou-se k=?? a acurácia obtida foi
  ???
 \end_layout
 
 \begin_layout Subsection
-SVM
+SVM + PCA 35 componentes
 \end_layout
 
 \begin_layout Standard
@@ -522,44 +447,17 @@ Outro modelo escolhido para experimentação de classificação do conjudo de
  treinamento como pontos no espaço, mapeados de maneira que os exemplos
  de cada classe sejam divididos por hiperplanos de separação.
  Em outra palavras, dado um conjunto de dados de treinamento já classificado
- (aprendizado supervisionado) o algoritmo gera um hiperplano ótimo que categoriz
-a os novos exemplos presentes no conjunto de teste.
+ (aprendizado supervisionado) claro que seja tão amplo quanto possível.
+ Os novos exemplos são então mapeados no mesmo espaço e preditos como pertencent
+es a uma categoria baseados em qual o lado do espaço eles são colocados.
 \end_layout
 
 \begin_layout Standard
-Combinado com este algoritmo utilizou-se um algoritmo de análise de componentes
- principais a fim de selecionar as melhores features a serem utilzadas na
- classificação.
- Para utilizar o SVM foi necessário também escolher seus parâmetros de forma
- cuidadosa....
+Modelo escolhido! 98.283
 \end_layout
 
 \begin_layout Standard
-Este algoritmo foi o que resultou na melhor acurácia de 98.283%..
-\end_layout
-
-\begin_layout Standard
-Resultados, erros in-sample e out--of-sample
-\end_layout
-
-\begin_layout Section
-Conclusão
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-indent
-\end_layout
-
-\end_inset
-
-
+Resultados, erros in-sample e out--of-samplfe
 \end_layout
 
 \end_body
