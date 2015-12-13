@@ -298,13 +298,19 @@ A análise de componentes principais (PCA) é um método para reduzir as dimens�
 \end_layout
 
 \begin_layout Standard
-3 etapas
-\end_layout
-
-\begin_layout Standard
-Após uma análise do gráfico que relaciona a fração de variância com o número
- de componentes geradas, concluiu-se que utilizar 35 componentes iria levar
- a um resultado satisfatório.
+A análise de componentes principais foi feita utilizando-se a classe 
+\emph on
+decomposition
+\emph default
+ do pacote 
+\emph on
+Scikit Learn.
+ 
+\emph default
+Uma vez feita a decomposição foi possível gerar um gráfico com a relação
+ entre fração de variância e o número de componentes geradas.
+ A informação obtida com este gráfico acarretou a conlusão de que utilizar
+ 35 componentes poderia levar a um resultado satisfatório.
  
 \end_layout
 
@@ -543,18 +549,6 @@ Para a classificação dos dígitos utilizou-se k=?? a acurácia obtida foi
 \end_layout
 
 \begin_layout Subsection
-Random Forest
-\end_layout
-
-\begin_layout Subsection
-Neural Network
-\end_layout
-
-\begin_layout Subsection
-Convolutional Neural Network
-\end_layout
-
-\begin_layout Subsection
 SVM
 \end_layout
 
@@ -589,7 +583,10 @@ a os novos exemplos presentes no conjunto de teste.
 Combinado com este algoritmo utilizou-se um algoritmo de análise de componentes
  principais a fim de selecionar as melhores features a serem utilzadas na
  classificação.
- 
+ Como mencionado na seção 3 foram selecionadas as 35 principais componentes
+ a partir do conjunto de treinamento.
+ O subconjunto dos dados obtido a partir da decomposição dos dados foi utilizado
+ como entrada para o classificador SVM.
 \end_layout
 
 \begin_layout Standard
