@@ -294,53 +294,6 @@ A análise de componentes principais (PCA) é um método para reduzir as dimens�
  Isto é feito, explorando-se correlações entre algumas das dimensões.
  Por essa razão, a utilização deste tipo de método é bastante conveniente
  em contextos como o de reconhecimento de imagens.
- 
-\end_layout
-
-\begin_layout Standard
-3 etapas
-\end_layout
-
-\begin_layout Standard
-Após uma análise do gráfico que relaciona a fração de variância com o número
- de componentes geradas, concluiu-se que utilizar 35 componentes iria levar
- a um resultado satisfatório.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename variance-features.png
-	scale 60
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Variância x Número de 
-\emph on
-features
-\emph default
- geradas
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -543,18 +496,6 @@ Para a classificação dos dígitos utilizou-se k=?? a acurácia obtida foi
 \end_layout
 
 \begin_layout Subsection
-Random Forest
-\end_layout
-
-\begin_layout Subsection
-Neural Network
-\end_layout
-
-\begin_layout Subsection
-Convolutional Neural Network
-\end_layout
-
-\begin_layout Subsection
 SVM
 \end_layout
 
@@ -589,20 +530,8 @@ a os novos exemplos presentes no conjunto de teste.
 Combinado com este algoritmo utilizou-se um algoritmo de análise de componentes
  principais a fim de selecionar as melhores features a serem utilzadas na
  classificação.
- 
-\end_layout
-
-\begin_layout Standard
-Para utilizar o SVM foi necessário também escolher seus parâmetros de forma
- cuidadosa....
-\end_layout
-
-\begin_layout Standard
-inicialmente utilizou-se o kernel gaussiano e a acuracia obtida foi..
-\end_layout
-
-\begin_layout Standard
-em seguida resolveu-se utilizar o kernel rbf
+ Após umaPara utilizar o SVM foi necessário também escolher seus parâmetros
+ de forma cuidadosa....
 \end_layout
 
 \begin_layout Standard
