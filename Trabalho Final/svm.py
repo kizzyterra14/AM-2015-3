@@ -19,7 +19,7 @@ train_data_normalized = preprocessing.normalize(train_data, norm='l2')
 test_data_normalized = preprocessing.normalize(test_data, norm='l2')
 #number of components to extract
 print "Reduction ..."
-pca = PCA(n_components=36, whiten=True)
+pca = PCA(n_components=40, whiten=True)
 pca.fit(X_normalized)
 print "transform training data..."
 train_data_normalized = pca.transform(train_data_normalized)
@@ -27,8 +27,8 @@ print "transform test data..."
 test_data_normalized = pca.transform(test_data_normalized)
 
 print "Choose best hyperparameters..."
-gammas = np.logspace(-2,3,20)
-cs = np.logspace(-2,3,20)
+gammas = np.logspace(-2,3,15)
+cs = np.logspace(-2,3,15)
 
 svc = svm.SVC(kernel='rbf')
 clf = grid_search.GridSearchCV(estimator=svc, param_grid=[dict(gamma=gammas), dict(C=cs)],n_jobs=-1)

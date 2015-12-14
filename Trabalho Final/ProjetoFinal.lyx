@@ -496,7 +496,7 @@ Nesta seção descreve-se os modelos selecionados, os quais foram utilizados
 \end_layout
 
 \begin_layout Subsection
-Linear
+Regressão Logística
 \end_layout
 
 \begin_layout Standard
@@ -695,7 +695,7 @@ cross-validation
 \emph default
 com 
 \emph on
-kfold=5.
+kfold=3.
  
 \emph default
 O melhor par de parâmetros foi escolhido dentre 15 valores de C gerados
@@ -794,10 +794,6 @@ O desenvolvimento do Projeto Final proposto permitiu que fossem colocados
 De certo modo, o modelo de projeto escolhido - uma competição do Kaggle
  - é um motivador a mais quando se está buscando boas soluções que permitam
  obter a melhor performance possível na solução do desafio.
-\end_layout
-
-\begin_layout Standard
-
 \end_layout
 
 \end_body
