@@ -248,9 +248,7 @@ db/mnist/index.html).
 \end_layout
 
 \begin_layout Section
-Escolha de 
-\emph on
-features
+Pré-processamento dos dados
 \end_layout
 
 \begin_layout Standard
@@ -270,31 +268,104 @@ indent
 \end_layout
 
 \begin_layout Standard
-A escolha das 
+O pré-processamento dos dados é a primeira etapa (desconsiderando o processo
+ de obtenção) e é importante para conseguir aprender eficientemente o comportame
+nto dos dados.
+ A remoção de dimensões pouco relevantes na aproximação da 
 \emph on
-features 
+target function
 \emph default
-a serem utilizadas em cada algoritmo é uma etapa importante na proposta
- de uma solução adequada.
- Quando lidamos com imagens consideramos cada pixel como uma dimensão diferente;
- é fácil perceber que para uma imagem não muito grande o número de dimensões
- já se torna grande e a correlação entre elas também.
- Para contornar este problema, utilizam-se técnicas como análise de componente
- principais (PCA) e 
-\emph on
-data
-\emph default
- whitening.
- 
+, a centralização, que é uma transformação que translada os dados de entrada
+ para a origem removendo viés, e a normalização dos dados, que garante que
+ todas as dimensões estão na mesma escala, são exemplos de pré-processamentos
+ que são importantes de ser aplicados sobre diversos conjuntos de dados
+ antes de utilizá-los em um modelo.
 \end_layout
 
 \begin_layout Standard
-A análise de componentes principais (PCA) é um método para reduzir as dimensões
- de um conjunto de dados.
- Isto é feito, explorando-se correlações entre algumas das dimensões.
- Por essa razão, a utilização deste tipo de método é bastante conveniente
- em contextos como o de reconhecimento de imagens.
+No contexto do problema de reconhecimento de dígitos, cada pixel da imagem
+ é considerado uma dimensão.
+ Com isso, uma imagem 28x28 pixels tem 784 dimensões, e a correlação entre
+ essas dimensões é alta.
+ Para tratar os dados, foram utilizadas quatro técnicas de pré-processamento:
+ centralização, normalização, 
+\emph on
+data whitening 
+\emph default
+e 
+\emph on
+principal component analysis (PCA)
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+A centralização é uma transformação simples e geralmente benigna que translada
+ os dados para a origem removendo qualquer viés dos dados.
+\end_layout
+
+\begin_layout Standard
+A normalização garante que todas as dimensões estão na mesma escala, o que
+ é uma transformação importante para muitos modelos, como por exemplo os
+ que utilizam a distância euclidiana.
+ Uma motivação a mais que tivemos para normalizar os dados foi a utilização
+ de 
+\emph on
+support vector machines (SVM)
+\emph default
+ com o 
+\emph on
+radius basis function kernel.
+
+\emph default
+ O 
+\emph on
+rbf kernel
+\emph default
+ é dado por 
+\begin_inset Formula $K(x,y)=exp(-c*||x-y||^{2})$
+\end_inset
+
+.
+ Sendo assim, se o dominío das dimensões for muito largo (0-255), então
  
+\begin_inset Formula $||x-y||^{2}$
+\end_inset
+
+ será muito grande, comprometendo a eficiência do método.
+\end_layout
+
+\begin_layout Standard
+O 
+\emph on
+data
+\emph default
+ whitening
+\emph on
+ 
+\emph default
+é utilizado para duas principais finalidades: diminuir a correlação entre
+ as features existentes e forçar todas as 
+\emph on
+features 
+\emph default
+a terem a mesma variância.
+ Esta método é bastante utilizado no contexto de classificação de imagens
+ devido a alta redundância de informação presente em pixels adjacentes.
+ No caso de imagens, pixels próximos fornecem informações altamente correlaciona
+das e o objetivo do 
+\emph on
+whitening 
+\emph default
+é diminuir a quantidade de informação redundante.
+\end_layout
+
+\begin_layout Standard
+Por último, a análise de componentes principais, o qual tem como finalidade
+ selecionar as dimensões que possuem a maiori influência no processo de
+ generalização.
+ Se uma dimensão possui o valor 0 na maioria das imagens, ele não possui
+ pouca informação sobre o conjunto de dados.
 \end_layout
 
 \begin_layout Standard
@@ -307,10 +378,10 @@ decomposition
 Scikit Learn.
  
 \emph default
-Uma vez feita a decomposição foi possível gerar um gráfico com a relação
+Uma vez feita a decomposição, foi possível gerar um gráfico com a relação
  entre fração de variância e o número de componentes geradas.
  A informação obtida com este gráfico acarretou a conlusão de que utilizar
- 35 componentes poderia levar a um resultado satisfatório.
+ de 35 a 40 componentes poderia levar a um resultado satisfatório.
  
 \end_layout
 
@@ -349,31 +420,6 @@ features
 
 \end_layout
 
-\begin_layout Standard
-O 
-\emph on
-data
-\emph default
- whitening
-\emph on
- 
-\emph default
-é utilizado para duas principais finalidades: diminuir a correlação entre
- as features existentes e forçar todas as 
-\emph on
-features 
-\emph default
-a terem a mesma variância.
- Esta método é bastante utilizad no contexto de classificação de imagens
- devido a alta redundância de informação presente em pixels adjacentes.
- No caso de imagens, pixels próximos fornecem informações altamente correlaciona
-das e o objetivo do 
-\emph on
-whitening 
-\emph default
-é diminuir a quantidade de informação redundante.
-\end_layout
-
 \begin_layout Section
 Seleção de Modelos
 \end_layout
@@ -396,29 +442,28 @@ indent
 
 \begin_layout Standard
 A seleção de modelos adequados a serem utilizados na classificação de um
- determinado conjunto de dados deve considerar variáveis como por exemplo
- a natureza destes dados - categóricos ou numéricos? - , a quantidade de
- dados disponível, a complexidade da classificação, a acurácia na classifiação
- e a velocidade de classificação.
+ determinado conjunto de dados deve considerar os tipos de dados, a quantidade
+ de dados disponível, a complexidade da classificação, a acurácia na classificaç
+ão e a velocidade de classificação.
  
 \end_layout
 
 \begin_layout Standard
-No contexto de uma competição do Kaggle a variável de maior prioriadade
+No contexto de uma competição do Kaggle, a variável de maior prioridade
  é a acurácia na classificação uma vez que submete-se o resultado da classificaç
-ão sobre o conjunto de teste e não o algorimto implementado em si.
+ão sobre o conjunto de teste e não o algoritmo implementado em si.
  
 \end_layout
 
 \begin_layout Standard
 Evidentemente, a acurácia de um classificador baseia-se no conjunto de dados
- que se está analisando, consequentemente esta escolha exige experimentação
+ que está sendo analisado, consequentemente esta escolha exige experimentação
  e por essa razão a etapa de seleção de modelos consiste de elencar alguns
  modelos candidatos cuja performance deverá ser comparada para a classificação
  do conjunto de dados do MNIST.
  A escolha destes candidatos por sua vez, leva em conta as características
  e vantagens dos principais modelos conhecidos.
- Os classificadores escolhidos estão descritos na seção 5 a seguir.
+ A descrição dos classificadores escolhidos se encontram na seção 5.
 \end_layout
 
 \begin_layout Section
@@ -442,7 +487,7 @@ indent
 \end_layout
 
 \begin_layout Standard
-Nesta seção descreve-se os modelos selecionados os quais foram utilizados
+Nesta seção descreve-se os modelos selecionados, os quais foram utilizados
  para a classificação do conjunto de dados do MNIST.
  A descrição destes algoritmos compreende uma breve análise teórica - incluindo
  comentários sobre a seleção de parâmetros - e uma análise da respectiva
@@ -471,7 +516,41 @@ indent
 \end_layout
 
 \begin_layout Standard
-O primeiro modelo utilizado foi um modelo básico linear....
+O primeiro modelo utilizado para classificação foi um modelo de classificação
+ linear: regressão logística.
+ A regressão logística pode ser vista como uma generalização da regressão
+ linear para os problemas de classificação de variáveis categóricas.
+ Uma grande diferença entre os dois modelos está no fato de que a regressão
+ logística prevê a probabilidade de resultados particulares atarvés da função
+ de distribuição de logística.
+ Os valores previstos neste de classificação são, portanto pertencentes
+ ao intervalo 
+\begin_inset Formula $(0,1)$
+\end_inset
+
+.
+ Desta forma, a regressão logística prevê a probabilidade de resultados
+ particulares.
+ 
+\end_layout
+
+\begin_layout Standard
+A implementação do modelo de Regressão Logística utilizada foi a do pacote
+ 
+\emph on
+sklearn.linear_model 
+\emph default
+feito para a linguagem 
+\emph on
+Python.
+
+\emph default
+ A performance obtida com este classificador na submissão no Kaggle foi
+ de 
+\begin_inset Formula $91,00\%$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -513,43 +592,30 @@ O parâmetro k controla o trade off entre a aproximação e a generalização.
 \end_inset
 
  muito pequeno obtém-se uma regra de decisão complexa, o que causa overfitting
- nos dados; Por outro lado, um
+ nos dados; Por outro lado, um 
 \begin_inset Formula $k$
 \end_inset
 
  muito garnde conduz a underfitting.
- Embora
-\emph on
- k = 3
-\emph default
- funcione bem quando 
-\begin_inset Formula $E_{out}$
+\end_layout
+
+\begin_layout Standard
+Para a o problema de classificação dos dígitos optou-se por utilizar o modelo
+ com 
+\begin_inset Formula $k=3$
 \end_inset
 
- é pequeno, em situações mais gerais precisamos escolher entre os diferentes
- 
-\begin_inset Formula $k$
-\end_inset
-
-: cada valor de 
-\begin_inset Formula $k$
-\end_inset
-
-, por sua vez, corrsponde será um modelo diferente.
- Para cada caso, portanto, deve-se o melhor valor de 
-\begin_inset Formula $k$
+ e a acurácia obtida na submissão foi de 
+\begin_inset Formula $97.70\%$
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Standard
-Para a classificação dos dígitos utilizou-se k=?? a acurácia obtida foi
- ???
-\end_layout
-
 \begin_layout Subsection
-SVM
+SVM e 
+\emph on
+kernel
 \end_layout
 
 \begin_layout Standard
@@ -569,45 +635,133 @@ indent
 \end_layout
 
 \begin_layout Standard
-Outro modelo escolhido para experimentação de classificação do conjudo de
- dados da competição foi o SVM.
- Um modelo SVM é uma representação dos exemplos presentes no conjunto de
+Dentre os modelos utilizados, o que apresentou o melhor resultado foi 
+\emph on
+support vector machines
+\emph default
+ (SVM) com 
+\emph on
+kernel
+\emph default
+.
+ Uma grande vantagem deste modelo é sua robustez a ruído, ou seja, é mais
+ difícil de ocorrer 
+\emph on
+overfitting
+\emph default
+.
+ O 
+\emph on
+kernel
+\emph default
+ se constitui de método eficiente para utilizar transformações não-lineares
+ em grandes dimensões.
+ Ou seja, temos um modelo não-linear com regularização automática.
+\end_layout
+
+\begin_layout Standard
+Um modelo SVM é uma representação dos exemplos presentes no conjunto de
  treinamento como pontos no espaço, mapeados de maneira que os exemplos
- de cada classe sejam divididos por hiperplanos de separação.
- Em outra palavras, dado um conjunto de dados de treinamento já classificado
- (aprendizado supervisionado) o algoritmo gera um hiperplano ótimo que categoriz
-a os novos exemplos presentes no conjunto de teste.
+ de cada classe sejam divididos por hiperplanos ótimos.
 \end_layout
 
 \begin_layout Standard
-Combinado com este algoritmo utilizou-se um algoritmo de análise de componentes
- principais a fim de selecionar as melhores features a serem utilzadas na
- classificação.
- Como mencionado na seção 3 foram selecionadas as 35 principais componentes
- a partir do conjunto de treinamento.
- O subconjunto dos dados obtido a partir da decomposição dos dados foi utilizado
- como entrada para o classificador SVM.
+Dado o pré-processamento descrito na seção 3, foram utilizados 40 componentes
+ a partir do PCA, e o kernel utilizado foi o 
+\emph on
+radius basis function.
+ 
+\emph default
+Com isso, dois hiperparâmetros precisamos ser escolhidos: o parâmetro de
+ penalização C e parâmetro 
+\emph on
+gamma
+\emph default
+, que especifica a 
+\begin_inset Quotes eld
+\end_inset
+
+largura
+\begin_inset Quotes erd
+\end_inset
+
+ do kernel.
 \end_layout
 
 \begin_layout Standard
-Para utilizar o SVM foi necessário também escolher seus parâmetros de forma
- cuidadosa....
+Para a escolha de tais parâmetros foi utilizado o método 
+\emph on
+cross-validation 
+\emph default
+com 
+\emph on
+kfold=5.
+ 
+\emph default
+O melhor par de parâmetros foi escolhido dentre 15 valores de C gerados
+ aleatoriamentro entre
+\emph on
+ 
+\begin_inset Formula $10^{-2}$
+\end_inset
+
+ 
+\emph default
+e
+\emph on
+ 
+\begin_inset Formula $10^{4}$
+\end_inset
+
+ 
+\emph default
+e 15 valores para gamma entre 
+\begin_inset Formula $10^{-4}$
+\end_inset
+
+e 
+\begin_inset Formula $10^{3}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-inicialmente utilizou-se o kernel gaussiano e a acuracia obtida foi..
+Após 4 horas o algoritmo retornou como melhores hiperparâmetros 
+\begin_inset Formula $C=2.276$
+\end_inset
+
+ e 
+\begin_inset Formula $gamma=0$
+\end_inset
+
+.
+ O erro 
+\emph on
+cross-validation
+\emph default
+ foi 
+\begin_inset Formula $0.01700$
+\end_inset
+
+ e, após a submissão no 
+\emph on
+kaggle
+\emph default
+, o erro 
+\emph on
+out-of-sample
+\emph default
+ foi 
+\begin_inset Formula $0.01571$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-em seguida resolveu-se utilizar o kernel rbf
-\end_layout
-
-\begin_layout Standard
-Este algoritmo foi o que resultou na melhor acurácia de 98.283%..
-\end_layout
-
-\begin_layout Standard
-Resultados, erros in-sample e out--of-sample
+Este foi o modelo de melhor performance e, consequentemente, o modelo escolhido
+ para a solução do desafio.
 \end_layout
 
 \begin_layout Section
@@ -627,6 +781,22 @@ indent
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+O desenvolvimento do Projeto Final proposto permitiu que fossem colocados
+ os aprendizados adquiridos ao longo da disciplina em prática, tendo sido,
+ por esta razão, uma experiência bastante proveitosa e interessante.
+\end_layout
+
+\begin_layout Standard
+De certo modo, o modelo de projeto escolhido - uma competição do Kaggle
+ - é um motivador a mais quando se está buscando boas soluções que permitam
+ obter a melhor performance possível na solução do desafio.
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 

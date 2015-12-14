@@ -1,6 +1,8 @@
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.svm import SVC
+from sklearn import preprocessing
+from sklearn import svm, grid_search
 
 print "Preparing the data..."
 print "--------------------------------"
@@ -13,28 +15,29 @@ print "separate labels from training data"
 train_data = train[:,1:]
 target = train[:,0]
 
+train_data_normalized = preprocessing.normalize(train_data, norm='l2')
+test_data_normalized = preprocessing.normalize(test_data, norm='l2')
 #number of components to extract
 print "Reduction ..."
-pca = PCA(n_components=35, whiten=True)
-pca.fit(train_data)
-train_data = pca.transform(train_data)
+pca = PCA(n_components=36, whiten=True)
+pca.fit(X_normalized)
+print "transform training data..."
+train_data_normalized = pca.transform(train_data_normalized)
+print "transform test data..."
+test_data_normalized = pca.transform(test_data_normalized)
 
+print "Choose best hyperparameters..."
+gammas = np.logspace(-2,3,20)
+cs = np.logspace(-2,3,20)
 
-print "Training SVM..."
-svc = SVC(verbose=True)
-svc.fit(train_data, target)
+svc = svm.SVC(kernel='rbf')
+clf = grid_search.GridSearchCV(estimator=svc, param_grid=[dict(gamma=gammas), dict(C=cs)],n_jobs=-1)
+clf.fit(train_data, target)
 
-test_data = pca.transform(test_data)
-test_y = svc.predict(test_data)
+print "best hyperparameters:\nC:{0}\ngamma:{1}".format(clf.best_estimator_.C, clf.best_estimator_.gamma)
 
-
-print "Saving predictions..."
-# with open('svm_pca.csv', 'w') as writer:
-#     writer.write('"ImageId","Label"\n')
-#     count = 0
-#     for p in predict:
-#         count += 1
-#         writer.write(str(count) + ',"' + str(p) + '"\n')
-pd.DataFrame({"ImageId": range(1,len(test_y)+1), "Label": map(int,test_y)}).to_csv('svm_l.csv', index=False, header=True)
-
-# O melhor resultado foi obtido com PCA 35 componentes, C=1
+print "apply svm with best hyperparameters"
+svc2 = svm.SVC(gamma=clf.best_estimator_.gamma, C=clf.best_estimator_.C)
+svc2.fit(train_data_normalized, target)
+test_y = svc2.predict(test_data_normalized)
+pd.DataFrame({"ImageId": range(1,len(test_y)+1), "Label": map(int,test_y)}).to_csv('hyper_parameters_svm_normalized.csv', index=False, header=True)
