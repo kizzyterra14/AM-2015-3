@@ -978,15 +978,81 @@ De certo modo, o modelo de projeto escolhido - uma competição do Kaggle
  obter a melhor performance possível na solução do desafio.
 \end_layout
 
+\begin_layout Section
+Referências
+\end_layout
+
 \begin_layout Standard
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-bibfiles "references"
-options "abntex2-alf"
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+indent
+\end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Classification with Scikit Learn.
+ 
+\emph default
+Disponível em: http://www.datarobot.com/blog/classification-with-scikit-learn/
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Scikit Learn - Linear Model.
+
+\emph default
+ Disponível em: http://scikit-learn.org/stable/modules/classes.html#module-sklearn.
+linear_model
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Scikit Learn - Decomposition.
+
+\emph default
+ Disponível em: http://scikit-learn.org/stable/modules/classes.html#module-sklearn.
+decomposition
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Scikit Learn - PreProcessing.
+ 
+\emph default
+Disponível em: http://scikit-learn.org/stable/modules/classes.html#module-sklearn.p
+reprocessing
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Scikit Learn - Support Vector Machines.
+ 
+\emph default
+Disponível em: http://scikit-learn.org/stable/modules/svm.html
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Scikit Learn - Nearest Neighbors.
+ 
+\emph default
+Disponível em: http://scikit-learn.org/stable/modules/neighbors.html
 \end_layout
 
 \end_body
